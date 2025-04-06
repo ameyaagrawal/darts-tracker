@@ -10,8 +10,6 @@ function TrackerPage({ selectedMode, selectedPlayers, handleBack }) {
       ) : (
         <DTW selectedPlayers={selectedPlayers} />
       )}
-      <h2>mode: {selectedMode}</h2>
-      <h2>players: {selectedPlayers}</h2>
       <button onClick={handleBack}>Back</button>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function Cricket({ selectedPlayers }) {
   const [playerNames, setPlayerNames] = useState(
-    Array.from({ length: selectedPlayers }, (_, i) => `P${i + 1} (click to edit)`)
+    Array.from({ length: selectedPlayers }, (_, i) => `P${i + 1}`)
   );
 
   const targets = ['Score', 20, 19, 18, 17, 16, 15, 'B'];
@@ -106,17 +106,17 @@ function Cricket({ selectedPlayers }) {
         </div>
       )}
       <div style={{ width: 'fit-content', margin: '0 auto' }}>
-        <table border="1">
+        <table border="1" style={{ borderCollapse: 'collapse', textAlign: 'center' }}>
           <tbody>
             {Array.from({ length: 7 + 2 }).map((_, rowIndex) => (
               <tr key={rowIndex}>
                 {Array.from({ length: selectedPlayers + 1 }).map((_, colIndex) => {
                   if (rowIndex === 0 && colIndex === 0) {
-                    return <td key={colIndex}></td>;
+                    return <td key={colIndex} style={{ height: '50px', width: '60px', textAlign: 'center', verticalAlign: 'middle' }}></td>;
                   } else if (rowIndex === 0 && colIndex >= 1) {
                     // Editable text fields for the first row's last selectedPlayers columns
                     return (
-                      <td key={colIndex}>
+                      <td key={colIndex} style={{ height: '50px', width: '60px', textAlign: 'center', verticalAlign: 'middle' }}>
                         <input
                           type="text"
                           value={playerNames[colIndex - 1] || ''}
@@ -127,20 +127,35 @@ function Cricket({ selectedPlayers }) {
                             )
                           }
                           disabled={gameOver}
+                          style={{ textAlign: 'center', height: '50px', width: '60px' }}
                         />
                       </td>
                     );
-                  }
-                  else if (rowIndex > 0 && colIndex === 0) {
-                    return <td key={colIndex}>{targets[rowIndex-1]}</td>;
-                  }
-                  else if (rowIndex === 1 && colIndex > 0) {
-                    return <td key={colIndex}>{scores[colIndex-1]}</td>;
+                  } else if (rowIndex > 0 && colIndex === 0) {
+                    return (
+                      <td key={colIndex} style={{ height: '50px', textAlign: 'center', verticalAlign: 'middle' }}>
+                        {targets[rowIndex - 1]}
+                      </td>
+                    );
+                  } else if (rowIndex === 1 && colIndex > 0) {
+                    return (
+                      <td key={colIndex} style={{ height: '50px', textAlign: 'center', verticalAlign: 'middle' }}>
+                        {scores[colIndex - 1]}
+                      </td>
+                    );
                   }
                   return (
-                    <td key={colIndex}>
-                      <button onClick={() => handleButtonClick(rowIndex-2, colIndex-1)}
-                        disabled={gameOver}> {counts[rowIndex-2][colIndex-1]}
+                    <td key={colIndex} style={{ height: '50px', textAlign: 'center', verticalAlign: 'middle' }}>
+                      <button
+                        onClick={() => handleButtonClick(rowIndex - 2, colIndex - 1)}
+                        disabled={gameOver}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          backgroundColor: counts[rowIndex - 2][colIndex - 1] >= 3 ? '#88E788' : '#FAFAFA', // Change to green if count >= 3
+                        }}
+                      >
+                        {counts[rowIndex - 2][colIndex - 1]}
                       </button>
                     </td>
                   );
@@ -149,7 +164,7 @@ function Cricket({ selectedPlayers }) {
             ))}
           </tbody>
         </table>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px', marginBottom: '20px' }}>
           <button onClick={handleUndoButton} disabled={history.length === 0}>Undo</button>
           <button onClick={() => { resetState(); }}>Clear</button>
         </div>

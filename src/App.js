@@ -36,7 +36,17 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100vh',
+        textAlign: 'center',
+      }}
+    >
       <h1>Darts Tracker</h1>
       {!isModeSelected ? (
         <SettingsPage

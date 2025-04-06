@@ -13,7 +13,11 @@ function SettingsPage({
     <div>
       <ModeSelect selectedMode={selectedMode} handleModeChange={handleModeChange} />
       <PlayerSelect selectedPlayers={selectedPlayers} handlePlayersChange={handlePlayersChange} />
-      <button onClick={handleConfirm} disabled={!selectedMode || !selectedPlayers}>
+      <button
+        onClick={handleConfirm}
+        disabled={!selectedMode || !selectedPlayers}
+        style={{ marginTop: '20px', marginBottom: '20px' }}
+      >
         Confirm
       </button>
     </div>
