@@ -10,6 +10,7 @@ function Cricket({ selectedPlayers }) {
   const [counts, setCounts] = useState(
     Array.from({ length: targets.length - 1 }, () => Array(selectedPlayers).fill(0))
   );
+  const [history, setHistory] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [winner, setWinner] = useState('');
   const [showWinner, setShowWinner] = useState(false);
@@ -21,6 +22,12 @@ function Cricket({ selectedPlayers }) {
   };
 
   const handleButtonClick = (rowIndex, colIndex) => {
+    // Save the current state to history before making changes
+    setHistory([
+      ...history,
+      { counts: [...counts.map((row) => [...row])], scores: [...scores] }
+    ]);
+
     // Record hit on a target
     const updatedCounts = [...counts];
     updatedCounts[rowIndex][colIndex] += 1;
@@ -49,6 +56,18 @@ function Cricket({ selectedPlayers }) {
     }
   };
 
+  const handleUndoButton = () => {
+    if (gameOver) {
+      setGameOver(false);
+    }
+    if (history.length > 0) {
+      const lastState = history[history.length - 1];
+      setCounts(lastState.counts);
+      setScores(lastState.scores);
+      setHistory(history.slice(0, -1)); // Remove the last state
+    }
+  };
+
   const checkWinner = (colIndex, counts, scores) => {
     // All target counts must be ≥ 3 for the player to win
     for (let i = 0; i < targets.length - 1; i++) {
@@ -59,9 +78,10 @@ function Cricket({ selectedPlayers }) {
     return scores[colIndex] === Math.min(...scores);
   };
 
-  function resetState() {
+  const resetState = () => {
     setScores(Array(selectedPlayers).fill(0));
     setCounts(Array.from({ length: targets.length - 1 }, () => Array(selectedPlayers).fill(0)));
+    setHistory([]);
     setGameOver(false);
     setWinner('');
     setShowWinner(false);
@@ -128,6 +148,7 @@ function Cricket({ selectedPlayers }) {
           ))}
         </tbody>
       </table>
+      <button onClick={handleUndoButton} disabled={history.length === 0}>Undo</button>
       <button onClick={() => {resetState();}}>Clear</button>
     </div>
   );
