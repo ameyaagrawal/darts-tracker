@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 function Cricket({ selectedPlayers }) {
   const [playerNames, setPlayerNames] = useState(
-    Array(selectedPlayers).fill('Player (click to edit)')
+    Array.from({ length: selectedPlayers }, (_, i) => `P${i + 1} (click to edit)`)
   );
 
   const targets = ['Score', 20, 19, 18, 17, 16, 15, 'B'];
@@ -105,51 +105,55 @@ function Cricket({ selectedPlayers }) {
           <button onClick={() => setShowWinner(false)}>Close</button>
         </div>
       )}
-      <table border="1">
-        <tbody>
-          {Array.from({ length: 7 + 2 }).map((_, rowIndex) => (
-            <tr key={rowIndex}>
-              {Array.from({ length: selectedPlayers + 1 }).map((_, colIndex) => {
-                if (rowIndex === 0 && colIndex === 0) {
-                  return <td key={colIndex}></td>;
-                } else if (rowIndex === 0 && colIndex >= 1) {
-                  // Editable text fields for the first row's last selectedPlayers columns
+      <div style={{ width: 'fit-content', margin: '0 auto' }}>
+        <table border="1">
+          <tbody>
+            {Array.from({ length: 7 + 2 }).map((_, rowIndex) => (
+              <tr key={rowIndex}>
+                {Array.from({ length: selectedPlayers + 1 }).map((_, colIndex) => {
+                  if (rowIndex === 0 && colIndex === 0) {
+                    return <td key={colIndex}></td>;
+                  } else if (rowIndex === 0 && colIndex >= 1) {
+                    // Editable text fields for the first row's last selectedPlayers columns
+                    return (
+                      <td key={colIndex}>
+                        <input
+                          type="text"
+                          value={playerNames[colIndex - 1] || ''}
+                          onChange={(e) =>
+                            handleNameChange(
+                              colIndex - 1,
+                              e.target.value
+                            )
+                          }
+                          disabled={gameOver}
+                        />
+                      </td>
+                    );
+                  }
+                  else if (rowIndex > 0 && colIndex === 0) {
+                    return <td key={colIndex}>{targets[rowIndex-1]}</td>;
+                  }
+                  else if (rowIndex === 1 && colIndex > 0) {
+                    return <td key={colIndex}>{scores[colIndex-1]}</td>;
+                  }
                   return (
                     <td key={colIndex}>
-                      <input
-                        type="text"
-                        value={playerNames[colIndex - 1] || ''}
-                        onChange={(e) =>
-                          handleNameChange(
-                            colIndex - 1,
-                            e.target.value
-                          )
-                        }
-                        disabled={gameOver}
-                      />
+                      <button onClick={() => handleButtonClick(rowIndex-2, colIndex-1)}
+                        disabled={gameOver}> {counts[rowIndex-2][colIndex-1]}
+                      </button>
                     </td>
                   );
-                }
-                else if (rowIndex > 0 && colIndex === 0) {
-                  return <td key={colIndex}>{targets[rowIndex-1]}</td>;
-                }
-                else if (rowIndex === 1 && colIndex > 0) {
-                  return <td key={colIndex}>{scores[colIndex-1]}</td>;
-                }
-                return (
-                  <td key={colIndex}>
-                    <button onClick={() => handleButtonClick(rowIndex-2, colIndex-1)}
-                      disabled={gameOver}> {counts[rowIndex-2][colIndex-1]}
-                    </button>
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <button onClick={handleUndoButton} disabled={history.length === 0}>Undo</button>
-      <button onClick={() => {resetState();}}>Clear</button>
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '20px' }}>
+          <button onClick={handleUndoButton} disabled={history.length === 0}>Undo</button>
+          <button onClick={() => { resetState(); }}>Clear</button>
+        </div>
+      </div>
     </div>
   );
 }
