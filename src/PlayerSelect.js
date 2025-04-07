@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PlayerSelect({ selectedPlayers, handlePlayersChange }) {
+function PlayerSelect({ numPlayers, handlePlayersChange }) {
   return (
     <div>
       <h2>Select Number of Players</h2>
@@ -11,7 +11,7 @@ function PlayerSelect({ selectedPlayers, handlePlayersChange }) {
           name="numberOfPlayers"
           value="2"
           onChange={handlePlayersChange}
-          checked={selectedPlayers === 2}
+          checked={numPlayers === 2}
         />
         <label htmlFor="players2">2 Players</label>
       </div>
@@ -22,7 +22,7 @@ function PlayerSelect({ selectedPlayers, handlePlayersChange }) {
           name="numberOfPlayers"
           value="3"
           onChange={handlePlayersChange}
-          checked={selectedPlayers === 3}
+          checked={numPlayers === 3}
         />
         <label htmlFor="players3">3 Players</label>
       </div>
@@ -33,7 +33,7 @@ function PlayerSelect({ selectedPlayers, handlePlayersChange }) {
           name="numberOfPlayers"
           value="4"
           onChange={handlePlayersChange}
-          checked={selectedPlayers === 4}
+          checked={numPlayers === 4}
         />
         <label htmlFor="players4">4 Players</label>
       </div>

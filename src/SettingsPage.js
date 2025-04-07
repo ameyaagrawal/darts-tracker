@@ -4,7 +4,7 @@ import PlayerSelect from './PlayerSelect';
 
 function SettingsPage({
   selectedMode,
-  selectedPlayers,
+  numPlayers,
   handleModeChange,
   handlePlayersChange,
   handleConfirm
@@ -12,10 +12,10 @@ function SettingsPage({
   return (
     <div>
       <ModeSelect selectedMode={selectedMode} handleModeChange={handleModeChange} />
-      <PlayerSelect selectedPlayers={selectedPlayers} handlePlayersChange={handlePlayersChange} />
+      <PlayerSelect numPlayers={numPlayers} handlePlayersChange={handlePlayersChange} />
       <button
         onClick={handleConfirm}
-        disabled={!selectedMode || !selectedPlayers}
+        disabled={!selectedMode || !numPlayers}
         style={{ marginTop: '20px', marginBottom: '20px' }}
       >
         Confirm

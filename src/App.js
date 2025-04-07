@@ -6,7 +6,7 @@ import TrackerPage from './TrackerPage';
 function App() {
   // State to track selected mode and number of players
   const [selectedMode, setSelectedMode] = useState('cricket');
-  const [selectedPlayers, setSelectedPlayers] = useState(2); // Default to 2 players
+  const [numPlayers, setNumPlayers] = useState(2); // Default to 2 players
   const [isModeSelected, setIsModeSelected] = useState(false);
 
   // Function to handle game mode selection change
@@ -16,13 +16,13 @@ function App() {
 
   // Function to handle number of players selection change
   const handlePlayersChange = (event) => {
-    setSelectedPlayers(Number(event.target.value)); // Set players as a number
+    setNumPlayers(Number(event.target.value)); // Set players as a number
   };
 
   // Function to handle the "Confirm" button click
   const handleConfirm = () => {
     console.log('Confirm button clicked');
-    if (selectedMode && selectedPlayers) {
+    if (selectedMode && numPlayers) {
       setIsModeSelected(true);
     }
   };
@@ -32,7 +32,7 @@ function App() {
     console.log('Back button clicked');
     setIsModeSelected(false); // Reset to mode selection page
     setSelectedMode(selectedMode); // Clear selected mode
-    setSelectedPlayers(selectedPlayers); // Reset to default 2 players
+    setNumPlayers(numPlayers); // Reset to default 2 players
   };
 
   return (
@@ -51,7 +51,7 @@ function App() {
       {!isModeSelected ? (
         <SettingsPage
           selectedMode={selectedMode}
-          selectedPlayers={selectedPlayers}
+          numPlayers={numPlayers}
           handleModeChange={handleModeChange}
           handlePlayersChange={handlePlayersChange}
           handleConfirm={handleConfirm}
@@ -59,7 +59,7 @@ function App() {
       ) : (
         <TrackerPage
           selectedMode={selectedMode}
-          selectedPlayers={selectedPlayers}
+          numPlayers={numPlayers}
           handleBack={handleBack}
         />
       )}

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
-function Cricket({ selectedPlayers }) {
+function Cricket({ numPlayers }) {
   const [playerNames, setPlayerNames] = useState(
-    Array.from({ length: selectedPlayers }, (_, i) => `P${i + 1}`)
+    Array.from({ length: numPlayers }, (_, i) => `P${i + 1}`)
   );
 
   const targets = ['Score', 20, 19, 18, 17, 16, 15, 'B'];
-  const [scores, setScores] = useState(Array(selectedPlayers).fill(0));
+  const [scores, setScores] = useState(Array(numPlayers).fill(0));
   const [counts, setCounts] = useState(
-    Array.from({ length: targets.length - 1 }, () => Array(selectedPlayers).fill(0))
+    Array.from({ length: targets.length - 1 }, () => Array(numPlayers).fill(0))
   );
   const [history, setHistory] = useState([]);
   const [gameOver, setGameOver] = useState(false);
@@ -21,7 +21,7 @@ function Cricket({ selectedPlayers }) {
     setPlayerNames(updatedValues);
   };
 
-  const handleButtonClick = (rowIndex, colIndex) => {
+  const handleTargetClick = (rowIndex, colIndex) => {
     // Save the current state to history before making changes
     setHistory([
       ...history,
@@ -40,7 +40,7 @@ function Cricket({ selectedPlayers }) {
       if (value === 'B') {
         value = 25;
       }
-      for (let i = 0; i < selectedPlayers; i++) {
+      for (let i = 0; i < numPlayers; i++) {
         if (i !== colIndex && counts[rowIndex][i] < 3) {
           updatedScores[i] += value;
         }
@@ -79,8 +79,8 @@ function Cricket({ selectedPlayers }) {
   };
 
   const resetState = () => {
-    setScores(Array(selectedPlayers).fill(0));
-    setCounts(Array.from({ length: targets.length - 1 }, () => Array(selectedPlayers).fill(0)));
+    setScores(Array(numPlayers).fill(0));
+    setCounts(Array.from({ length: targets.length - 1 }, () => Array(numPlayers).fill(0)));
     setHistory([]);
     setGameOver(false);
     setWinner('');
@@ -110,11 +110,11 @@ function Cricket({ selectedPlayers }) {
           <tbody>
             {Array.from({ length: 7 + 2 }).map((_, rowIndex) => (
               <tr key={rowIndex}>
-                {Array.from({ length: selectedPlayers + 1 }).map((_, colIndex) => {
+                {Array.from({ length: numPlayers + 1 }).map((_, colIndex) => {
                   if (rowIndex === 0 && colIndex === 0) {
                     return <td key={colIndex} style={{ height: '40px', width: '60px', textAlign: 'center', verticalAlign: 'middle' }}></td>;
                   } else if (rowIndex === 0 && colIndex >= 1) {
-                    // Editable text fields for the first row's last selectedPlayers columns
+                    // Editable text fields for the first row's last numPlayers columns
                     return (
                       <td key={colIndex} style={{ height: '40px', width: '60px', textAlign: 'center', verticalAlign: 'middle' }}>
                         <input
@@ -147,7 +147,7 @@ function Cricket({ selectedPlayers }) {
                   return (
                     <td key={colIndex} style={{ height: '40px', textAlign: 'center', verticalAlign: 'middle' }}>
                       <button
-                        onClick={() => handleButtonClick(rowIndex - 2, colIndex - 1)}
+                        onClick={() => handleTargetClick(rowIndex - 2, colIndex - 1)}
                         disabled={gameOver}
                         style={{
                           width: '100%',

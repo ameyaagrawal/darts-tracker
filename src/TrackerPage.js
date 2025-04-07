@@ -2,13 +2,13 @@ import React from 'react';
 import Cricket from './Cricket';
 import DTW from './DTW';
 
-function TrackerPage({ selectedMode, selectedPlayers, handleBack }) {
+function TrackerPage({ selectedMode, numPlayers, handleBack }) {
   return (
     <div>
       {selectedMode === 'cricket' ? (
-        <Cricket selectedPlayers={selectedPlayers} />
+        <Cricket numPlayers={numPlayers} />
       ) : (
-        <DTW selectedPlayers={selectedPlayers} />
+        <DTW numPlayers={numPlayers} />
       )}
       <button onClick={handleBack}>Back</button>
     </div>
