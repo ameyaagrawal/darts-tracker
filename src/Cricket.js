@@ -112,11 +112,11 @@ function Cricket({ selectedPlayers }) {
               <tr key={rowIndex}>
                 {Array.from({ length: selectedPlayers + 1 }).map((_, colIndex) => {
                   if (rowIndex === 0 && colIndex === 0) {
-                    return <td key={colIndex} style={{ height: '50px', width: '60px', textAlign: 'center', verticalAlign: 'middle' }}></td>;
+                    return <td key={colIndex} style={{ height: '40px', width: '60px', textAlign: 'center', verticalAlign: 'middle' }}></td>;
                   } else if (rowIndex === 0 && colIndex >= 1) {
                     // Editable text fields for the first row's last selectedPlayers columns
                     return (
-                      <td key={colIndex} style={{ height: '50px', width: '60px', textAlign: 'center', verticalAlign: 'middle' }}>
+                      <td key={colIndex} style={{ height: '40px', width: '60px', textAlign: 'center', verticalAlign: 'middle' }}>
                         <input
                           type="text"
                           value={playerNames[colIndex - 1] || ''}
@@ -127,25 +127,25 @@ function Cricket({ selectedPlayers }) {
                             )
                           }
                           disabled={gameOver}
-                          style={{ textAlign: 'center', height: '50px', width: '60px' }}
+                          style={{ textAlign: 'center', height: '40px', width: '60px' }}
                         />
                       </td>
                     );
                   } else if (rowIndex > 0 && colIndex === 0) {
                     return (
-                      <td key={colIndex} style={{ height: '50px', textAlign: 'center', verticalAlign: 'middle' }}>
+                      <td key={colIndex} style={{ height: '40px', textAlign: 'center', verticalAlign: 'middle' }}>
                         {targets[rowIndex - 1]}
                       </td>
                     );
                   } else if (rowIndex === 1 && colIndex > 0) {
                     return (
-                      <td key={colIndex} style={{ height: '50px', textAlign: 'center', verticalAlign: 'middle' }}>
+                      <td key={colIndex} style={{ height: '40px', textAlign: 'center', verticalAlign: 'middle' }}>
                         {scores[colIndex - 1]}
                       </td>
                     );
                   }
                   return (
-                    <td key={colIndex} style={{ height: '50px', textAlign: 'center', verticalAlign: 'middle' }}>
+                    <td key={colIndex} style={{ height: '40px', textAlign: 'center', verticalAlign: 'middle' }}>
                       <button
                         onClick={() => handleButtonClick(rowIndex - 2, colIndex - 1)}
                         disabled={gameOver}
