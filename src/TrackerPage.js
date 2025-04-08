@@ -6,9 +6,15 @@ function TrackerPage({ selectedMode, numPlayers, handleBack }) {
   return (
     <div>
       {selectedMode === 'cricket' ? (
-        <Cricket numPlayers={numPlayers} />
+        <div>
+          <h1>Cricket</h1>
+          <Cricket numPlayers={numPlayers} />
+        </div>
       ) : (
-        <DTW numPlayers={numPlayers} />
+        <div>
+          <h1>DTW</h1>
+          <DTW numPlayers={numPlayers} />
+        </div>
       )}
       <button onClick={handleBack}>Back</button>
     </div>

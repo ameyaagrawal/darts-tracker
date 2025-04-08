@@ -11,6 +11,7 @@ function SettingsPage({
 }) {
   return (
     <div>
+      <h1>Darts Tracker</h1>
       <ModeSelect selectedMode={selectedMode} handleModeChange={handleModeChange} />
       <PlayerSelect numPlayers={numPlayers} handlePlayersChange={handlePlayersChange} />
       <button

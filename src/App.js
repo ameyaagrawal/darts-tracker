@@ -21,7 +21,6 @@ function App() {
 
   // Function to handle the "Confirm" button click
   const handleConfirm = () => {
-    console.log('Confirm button clicked');
     if (selectedMode && numPlayers) {
       setIsModeSelected(true);
     }
@@ -29,7 +28,6 @@ function App() {
 
   // Function to handle the "Back" button click
   const handleBack = () => {
-    console.log('Back button clicked');
     setIsModeSelected(false); // Reset to mode selection page
     setSelectedMode(selectedMode); // Clear selected mode
     setNumPlayers(numPlayers); // Reset to default 2 players
@@ -47,7 +45,6 @@ function App() {
         textAlign: 'center',
       }}
     >
-      <h1>Darts Tracker</h1>
       {!isModeSelected ? (
         <SettingsPage
           selectedMode={selectedMode}
