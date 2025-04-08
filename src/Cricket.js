@@ -37,7 +37,7 @@ function Cricket({ numPlayers }) {
       <div style={{ width: 'fit-content', margin: '0 auto' }}>
         <table border="1" style={{ borderCollapse: 'collapse', textAlign: 'center' }}>
           <tbody>
-            {Array.from({ length: 7 + 2 }).map((_, rowIndex) => (
+            {Array.from({ length: targets.length + 1 }).map((_, rowIndex) => (
               <tr key={rowIndex}>
                 {Array.from({ length: numPlayers + 1 }).map((_, colIndex) => {
                   if (rowIndex === 0 && colIndex === 0) {
