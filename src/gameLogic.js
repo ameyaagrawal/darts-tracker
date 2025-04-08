@@ -4,7 +4,7 @@ export const handleNameChange = (index, value, playerNames, setPlayerNames) => {
     setPlayerNames(updatedValues);
 };
 
-export const handleTargetClick = (rowIndex, colIndex, counts, scores, targets, history, playerNames, numPlayers, setCounts, setScores, setHistory, setGameOver, setShowWinner, setWinner) => {
+export const handleTargetClick = (rowIndex, colIndex, counts, scores, targets, history, playerNames, numPlayers, addScore, setCounts, setScores, setHistory, setGameOver, setShowWinner, setWinner) => {
     // Save the current state to history before making changes
     setHistory([
         ...history,
@@ -16,15 +16,17 @@ export const handleTargetClick = (rowIndex, colIndex, counts, scores, targets, h
     updatedCounts[rowIndex][colIndex] += 1;
     setCounts(updatedCounts);
 
-    // Score on opponents if the target has been hit more than 3 times
+    // Score on opponents if the target has been hit more than 3 times and others haven't
     const updatedScores = [...scores];
-    if (counts[rowIndex][colIndex] > 3) {
-        let value = targets[rowIndex + 1];
-        if (value === 'B') {
-            value = 25;
-        }
+    let value = targets[rowIndex + 1];
+    if (value === 'B') {
+        value = 25;
+    } else if (value === 'D' || value === 'T' || value === 'W') {
+        value = addScore;
+    }
+    if (updatedCounts[rowIndex][colIndex] > 3) {
         for (let i = 0; i < numPlayers; i++) {
-            if (i !== colIndex && counts[rowIndex][i] < 3) {
+            if (updatedCounts[rowIndex][i] < 3) {
                 updatedScores[i] += value;
             }
         }

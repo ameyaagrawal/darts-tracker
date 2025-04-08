@@ -71,7 +71,7 @@ function Cricket({ numPlayers }) {
                   return (
                     <td key={colIndex} style={{ height: '40px', textAlign: 'center', verticalAlign: 'middle' }}>
                       <button
-                        onClick={() => handleTargetClick(rowIndex - 2, colIndex - 1, counts, scores, targets, history, playerNames, numPlayers, setCounts, setScores, setHistory, setGameOver, setShowWinner, setWinner)}
+                        onClick={() => handleTargetClick(rowIndex - 2, colIndex - 1, counts, scores, targets, history, playerNames, numPlayers, 0, setCounts, setScores, setHistory, setGameOver, setShowWinner, setWinner)}
                         disabled={gameOver}
                         style={{
                           width: '100%',
