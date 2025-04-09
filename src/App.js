@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import SettingsPage from './SettingsPage';
 import TrackerPage from './TrackerPage';
+import './App.css';
 
 function App() {
   // State to track selected mode and number of players
