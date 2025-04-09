@@ -1,3 +1,7 @@
+h1 {
+  margin-top: 0px;
+}
+
 .tracker-container {
   width: fit-content;
   margin: 0 auto;
@@ -37,8 +41,8 @@
 }
 
 .name-input {
-  height: 85%;
-  width: 85%;
+  height: 30px;
+  width: 50px;
   text-align: center;
 }
 

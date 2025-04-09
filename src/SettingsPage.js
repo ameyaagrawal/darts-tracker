@@ -17,7 +17,7 @@ function SettingsPage({
       <button
         onClick={handleConfirm}
         disabled={!selectedMode || !numPlayers}
-        style={{ marginTop: '20px', marginBottom: '20px' }}
+        style={{ marginTop: '20px' }}
       >
         Confirm
       </button>
