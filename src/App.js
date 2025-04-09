@@ -35,17 +35,7 @@ function App() {
   };
 
   return (
-    <div
-      className="App"
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100vh',
-        textAlign: 'center',
-      }}
-    >
+    <div className="App">
       {!isModeSelected ? (
         <SettingsPage
           selectedMode={selectedMode}
