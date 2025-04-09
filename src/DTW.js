@@ -21,7 +21,7 @@ function DTW({ numPlayers }) {
   const [selectedCol, setSelectedCol] = useState(0);
 
   return (
-    <div>
+    <div className="page-container">
       {showWinner && (
         <div className="popup-window">
           <h2>Game Over!</h2>
@@ -33,16 +33,23 @@ function DTW({ numPlayers }) {
         <div className="popup-window">
           <h2>Enter Score</h2>
           <input
-            type="number"
+            type="tel"
+            inputMode="numeric"
             min="1"
             placeholder="Score"
-            onChange={(e) => setAddScore(Number(e.target.value))} // Update target value
+            onChange={(e) => setAddScore(Number(e.target.value))}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleTargetClick(selectedRow, selectedCol, counts, scores, targets, history, playerNames, numPlayers, Number(e.target.value), setCounts, setScores, setHistory, setGameOver, setShowWinner, setWinner);
+                setShowAddScore(false);
+              }
+            }}
             className="dtw-score-input"
           />
           <button onClick={() => {
               handleTargetClick(selectedRow, selectedCol, counts, scores, targets, history, playerNames, numPlayers, addScore, setCounts, setScores, setHistory, setGameOver, setShowWinner, setWinner);
               setShowAddScore(false);
-            }}>Submit</button>
+            }}>Enter</button>
         </div>
       )}
       <div className='tracker-container'>
