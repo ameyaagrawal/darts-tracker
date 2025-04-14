@@ -1,3 +1,10 @@
+import img0 from './img/0.png';
+import img1 from './img/1.png';
+import img2 from './img/2.png';
+import img3 from './img/3.png';
+
+export const images = [img0, img1, img2, img3];
+
 export const handleNameChange = (index, value, playerNames, setPlayerNames) => {
     const updatedValues = [...playerNames];
     updatedValues[index] = value;
@@ -6,10 +13,7 @@ export const handleNameChange = (index, value, playerNames, setPlayerNames) => {
 
 export const handleTargetClick = (rowIndex, colIndex, counts, scores, targets, history, playerNames, numPlayers, addScore, setCounts, setScores, setHistory, setGameOver, setShowWinner, setWinner) => {
     // Save the current state to history before making changes
-    setHistory([
-        ...history,
-        { counts: [...counts.map((row) => [...row])], scores: [...scores] }
-    ]);
+    updateHistory(history, counts, scores, setHistory);
 
     // Record hit on a target
     const updatedCounts = [...counts];
@@ -22,7 +26,7 @@ export const handleTargetClick = (rowIndex, colIndex, counts, scores, targets, h
     if (value === 'B') {
         value = 25;
     } else if (value === 'D' || value === 'T' || value === 'W') {
-        value = addScore;
+        value = Math.floor(Math.min(180, Math.max(0, addScore)));
     }
     if (updatedCounts[rowIndex][colIndex] > 3) {
         for (let i = 0; i < numPlayers; i++) {
@@ -56,19 +60,34 @@ export const handleUndoButton = (history, gameOver, setHistory, setCounts, setSc
         setGameOver(false);
     }
     if (history.length > 0) {
-    const lastState = history[history.length - 1];
+    const lastState = history.pop();
     setCounts(lastState.counts);
     setScores(lastState.scores);
-    setHistory(history.slice(0, -1)); // Remove the last state
   }
 };
 
 
-export const resetState = (numPlayers, targets, setScores, setCounts, setHistory, setGameOver, setWinner, setShowWinner) => {
+export const resetState = (numPlayers, targets, history, counts, scores, setScores, setCounts, setHistory, setGameOver, setWinner, setShowWinner) => {
+    updateHistory(history, counts, scores, setHistory);
     setScores(Array(numPlayers).fill(0));
     setCounts(Array.from({ length: targets.length - 1 }, () => Array(numPlayers).fill(0)));
-    setHistory([]);
     setGameOver(false);
     setWinner('');
     setShowWinner(false);
   }
+
+
+export const updateHistory = (history, counts, scores, setHistory) => {
+    // Save the current state to history before making changes
+    if (history.length < 10) {
+        setHistory([
+            ...history,
+            { counts: [...counts.map((row) => [...row])], scores: [...scores] }
+        ]);
+    } else {  // keep only the last 5 states
+        setHistory([
+            ...history.slice(1,),
+            { counts: [...counts.map((row) => [...row])], scores: [...scores] }
+        ]);
+    }
+}
