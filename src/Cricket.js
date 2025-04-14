@@ -1,5 +1,5 @@
 import React from 'react';
-import { handleNameChange, handleTargetClick, handleUndoButton, resetState } from './gameLogic';
+import { handleNameChange, handleTargetClick, handleUndoButton, resetState, images } from './gameLogic';
 
 function Cricket({ numPlayers, targets, playerNames, setPlayerNames, counts, setCounts, scores, setScores, history, setHistory, gameOver, setGameOver, winner, setWinner, showWinner, setShowWinner }) {
   return (
@@ -18,39 +18,50 @@ function Cricket({ numPlayers, targets, playerNames, setPlayerNames, counts, set
               <tr key={rowIndex}>
                 {Array.from({ length: numPlayers + 1 }).map((_, colIndex) => {
                   if (rowIndex === 0 && colIndex === 0) {
-                    return <td key={colIndex} className="cricket-cell"></td>;
-                  } else if (rowIndex === 0 && colIndex >= 1) {
+                    return <td key={colIndex}></td>;
+                  } else if (rowIndex === 0 && colIndex > 0) {
                     return (
-                      <td key={colIndex} className="cricket-cell">
+                      <td key={colIndex} className="cricket-names">
                         <input
                           type="text"
                           value={playerNames[colIndex - 1] || ''}
                           onChange={(e) => handleNameChange(colIndex - 1, e.target.value, playerNames, setPlayerNames)}
                           disabled={gameOver}
-                          className="name-input"
+                          className="cricket-name-input"
                         />
-                      </td>
-                    );
-                  } else if (rowIndex > 0 && colIndex === 0) {
-                    return (
-                      <td key={colIndex} className="cricket-cell">
-                        {targets[rowIndex - 1]}
                       </td>
                     );
                   } else if (rowIndex === 1 && colIndex > 0) {
                     return (
-                      <td key={colIndex} className="cricket-cell">
+                      <td key={colIndex} className="cricket-scores">
                         {scores[colIndex - 1]}
+                      </td>
+                    );
+                  } else if (rowIndex > 0 && colIndex === 0) {
+                    return (
+                      <td key={colIndex} className="cricket-targets">
+                        {targets[rowIndex - 1]}
                       </td>
                     );
                   }
                   return (
                     <td key={colIndex} className="cricket-cell">
                       <button
-                        onClick={() => handleTargetClick(rowIndex - 2, colIndex - 1, counts, scores, targets, history, playerNames, numPlayers, 0, setCounts, setScores, setHistory, setGameOver, setShowWinner, setWinner)}
+                        onClick={() => {handleTargetClick(rowIndex - 2, colIndex - 1, counts, scores, targets, history, playerNames, numPlayers, 0, setCounts, setScores, setHistory, setGameOver, setShowWinner, setWinner); console.log(history);}}
                         disabled={gameOver}
                         className={`tracker-button ${counts[rowIndex - 2][colIndex - 1] >= 3 ? 'green' : ''}`}
-                      >{counts[rowIndex - 2][colIndex - 1]}</button>
+                      >
+                        <img
+                          src={images[Math.min(3, counts[rowIndex - 2][colIndex - 1])]}
+                          alt="icon"
+                          className="tracker-cell-image"
+                        />
+                        {counts[rowIndex - 2][colIndex - 1] > 3 && (
+                          <span className="tracker-cell-score">
+                            {`+${counts[rowIndex - 2][colIndex - 1] - 3}`}
+                          </span>
+                        )}
+                      </button>
                     </td>
                   );
                 })}
@@ -60,7 +71,7 @@ function Cricket({ numPlayers, targets, playerNames, setPlayerNames, counts, set
         </table>
         <div className='undo-clear-container'>
           <button onClick={() => handleUndoButton(history, gameOver, setHistory, setCounts, setScores, setGameOver)} disabled={history.length === 0}>Undo</button>
-          <button onClick={() => resetState(numPlayers, targets, setScores, setCounts, setHistory, setGameOver, setWinner, setShowWinner)}>Clear</button>
+          <button onClick={() => resetState(numPlayers, targets, history, counts, scores, setScores, setCounts, setHistory, setGameOver, setWinner, setShowWinner)}>Clear</button>
         </div>
       </div>
     </div>

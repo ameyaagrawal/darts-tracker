@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { handleNameChange, handleTargetClick, handleUndoButton, resetState } from './gameLogic';
+import { handleNameChange, handleTargetClick, handleUndoButton, resetState, images } from './gameLogic';
 
 function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCounts, scores, setScores, history, setHistory, gameOver, setGameOver, winner, setWinner, showWinner, setShowWinner }) {
   const [addScore, setAddScore] = useState(0);
@@ -46,29 +46,29 @@ function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCoun
               <tr key={rowIndex}>
                 {Array.from({ length: numPlayers + 1 }).map((_, colIndex) => {
                   if (rowIndex === 0 && colIndex === 0) {
-                    return <td key={colIndex} className='dtw-cell'></td>;
+                    return <td key={colIndex}></td>;
                   } else if (rowIndex === 0 && colIndex >= 1) {
                     // Editable text fields for the first row's last numPlayers columns
                     return (
-                      <td key={colIndex} className='dtw-cell'>
+                      <td key={colIndex} className='dtw-names'>
                         <input
                           type="text"
                           value={playerNames[colIndex - 1]}
                           onChange={(e) => handleNameChange(colIndex - 1, e.target.value, playerNames, setPlayerNames)}
                           disabled={gameOver}
-                          className='name-input'
+                          className='dtw-name-input'
                         />
                       </td>
                     );
                   } else if (rowIndex > 0 && colIndex === 0) {
                     return (
-                      <td key={colIndex} className='dtw-cell'>
+                      <td key={colIndex} className='dtw-targets'>
                         {targets[rowIndex - 1]}
                       </td>
                     );
                   } else if (rowIndex === 1 && colIndex > 0) {
                     return (
-                      <td key={colIndex} className='dtw-cell'>
+                      <td key={colIndex} className='dtw-scores'>
                         {scores[colIndex - 1]}
                       </td>
                     );
@@ -91,7 +91,16 @@ function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCoun
                         disabled={gameOver || showAddScore}
                         className={`tracker-button ${counts[rowIndex - 2][colIndex - 1] >= 3 ? 'green' : ''}`}
                       >
-                        {counts[rowIndex - 2][colIndex - 1]}
+                        <img
+                          src={images[Math.min(3, counts[rowIndex - 2][colIndex - 1])]}
+                          alt="icon"
+                          className="tracker-cell-image"
+                        />
+                        {counts[rowIndex - 2][colIndex - 1] > 3 && (
+                          <span className="tracker-cell-score">
+                            {`+${counts[rowIndex - 2][colIndex - 1] - 3}`}
+                          </span>
+                        )}
                       </button>
                     </td>
                   );
@@ -102,7 +111,7 @@ function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCoun
         </table>
         <div className='undo-clear-container'>
           <button onClick={() => handleUndoButton(history, gameOver, setHistory, setCounts, setScores, setGameOver)} disabled={history.length === 0}>Undo</button>
-          <button onClick={() => resetState(numPlayers, targets, setScores, setCounts, setHistory, setGameOver, setWinner, setShowWinner)}>Clear</button>
+          <button onClick={() => resetState(numPlayers, targets, history, counts, scores, setScores, setCounts, setHistory, setGameOver, setWinner, setShowWinner)}>Clear</button>
         </div>
       </div>
     </div>
