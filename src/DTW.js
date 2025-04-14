@@ -1,20 +1,7 @@
 import React, { useState } from 'react';
 import { handleNameChange, handleTargetClick, handleUndoButton, resetState } from './gameLogic';
 
-function DTW({ numPlayers }) {
-  const [playerNames, setPlayerNames] = useState(
-    Array.from({ length: numPlayers }, (_, i) => `P${i + 1}`)
-  );
-
-  const targets = ['Score', 20, 19, 18, 17, 16, 15, 'B', 'D', 'T', 'W'];
-  const [scores, setScores] = useState(Array(numPlayers).fill(0));
-  const [counts, setCounts] = useState(
-    Array.from({ length: targets.length - 1 }, () => Array(numPlayers).fill(0))
-  );
-  const [history, setHistory] = useState([]);
-  const [gameOver, setGameOver] = useState(false);
-  const [winner, setWinner] = useState('');
-  const [showWinner, setShowWinner] = useState(false);
+function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCounts, scores, setScores, history, setHistory, gameOver, setGameOver, winner, setWinner, showWinner, setShowWinner }) {
   const [addScore, setAddScore] = useState(0);
   const [showAddScore, setShowAddScore] = useState(false);
   const [selectedRow, setSelectedRow] = useState(0);
