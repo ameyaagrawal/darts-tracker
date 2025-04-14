@@ -37,22 +37,31 @@ export const handleTargetClick = (rowIndex, colIndex, counts, scores, targets, h
         setScores(updatedScores);
     }
 
-    // Check if the player has won, if so, show the winner
-    if (checkWinner(colIndex, updatedCounts, updatedScores, targets)) {
+    // Check if any player has won, if so, show the winner
+    let winner = checkWinner(updatedCounts, updatedScores, targets, playerNames);
+    if (winner !== "") {
         setGameOver(true);
         setShowWinner(true);
-        setWinner(playerNames[colIndex]);
+        setWinner(winner);
     }
 };
 
-export const checkWinner = (colIndex, counts, scores, targets) => {
-  // All target counts must be ≥ 3 for the player to win
-  for (let i = 0; i < targets.length - 1; i++) {
-    if (counts[i][colIndex] < 3) return false;
+export const checkWinner = (counts, scores, targets, playerNames) => {
+  // All target counts must be ≥ 3 for the player to win + minimum score
+  for (let colIndex = 0; colIndex < counts[0].length; colIndex++) {
+    let winner = true;
+    for (let i = 0; i < targets.length - 1; i++) {
+        if (counts[i][colIndex] < 3) {
+            winner = false;
+            break;
+        }
+    }
+    if (winner && scores[colIndex] === Math.min(...scores)) {
+        return playerNames[colIndex];
+    }
   }
 
-  // Check if the player's score is the minimum
-  return scores[colIndex] === Math.min(...scores);
+  return "";
 };
 
 export const handleUndoButton = (history, gameOver, setHistory, setCounts, setScores, setGameOver) => {
