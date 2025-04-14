@@ -30,8 +30,6 @@ function App() {
   // Function to handle the "Back" button click
   const handleBack = () => {
     setIsModeSelected(false); // Reset to mode selection page
-    setSelectedMode(selectedMode); // Clear selected mode
-    setNumPlayers(numPlayers); // Reset to default 2 players
   };
 
   return (
