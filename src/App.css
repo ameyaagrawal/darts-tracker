@@ -92,13 +92,7 @@ html, body {
   box-sizing: border-box;
 }
 
-.cricket-cell, .cricket-name-input {
-  width: calc(95vh / var(--num-rows));
-  text-align: center;
-}
-
-
-.dtw-cell, .dtw-name-input {
+.cricket-cell, .cricket-name-input, .dtw-cell, .dtw-name-input {
   width: calc(85vh / var(--num-rows));
   text-align: center;
 }
