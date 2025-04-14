@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/darts-tracker/static/css/main.0f3fd072.css",
-    "main.js": "/darts-tracker/static/js/main.d5f71717.js",
+    "main.css": "/darts-tracker/static/css/main.ab8211a0.css",
+    "main.js": "/darts-tracker/static/js/main.25f6cf31.js",
     "static/js/453.466b0085.chunk.js": "/darts-tracker/static/js/453.466b0085.chunk.js",
+    "static/media/3.png": "/darts-tracker/static/media/3.f76715b8e3fdb7bf9f30.png",
+    "static/media/2.png": "/darts-tracker/static/media/2.fcdeedf1b5354c324414.png",
     "index.html": "/darts-tracker/index.html",
-    "main.0f3fd072.css.map": "/darts-tracker/static/css/main.0f3fd072.css.map",
-    "main.d5f71717.js.map": "/darts-tracker/static/js/main.d5f71717.js.map",
+    "main.ab8211a0.css.map": "/darts-tracker/static/css/main.ab8211a0.css.map",
+    "main.25f6cf31.js.map": "/darts-tracker/static/js/main.25f6cf31.js.map",
     "453.466b0085.chunk.js.map": "/darts-tracker/static/js/453.466b0085.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f3fd072.css",
-    "static/js/main.d5f71717.js"
+    "static/css/main.ab8211a0.css",
+    "static/js/main.25f6cf31.js"
   ]
 }
