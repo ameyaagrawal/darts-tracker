@@ -4,6 +4,7 @@ import img2 from './img/2.png';
 import img3 from './img/3.png';
 
 export const images = [img0, img1, img2, img3];
+export const colors = ["#4285F4", "#34A853", "#FBBC05", "#EA4335"];
 
 export const handleNameChange = (index, value, playerNames, setPlayerNames) => {
     const updatedValues = [...playerNames];

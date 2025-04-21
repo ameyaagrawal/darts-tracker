@@ -103,6 +103,11 @@ html, body {
   margin: 5px
 }
 
+.cricket-name-input, .dtw-name-input {
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .cricket-scores, .dtw-scores {
   font-size: 30px;
   font-weight: bold;

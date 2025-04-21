@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { handleNameChange, handleTargetClick, handleUndoButton, resetState, images } from './gameLogic';
+import { handleNameChange, handleTargetClick, handleUndoButton, resetState, images, colors } from './gameLogic';
 
 function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCounts, scores, setScores, history, setHistory, gameOver, setGameOver, winner, setWinner, showWinner, setShowWinner }) {
   const [addScore, setAddScore] = useState(0);
@@ -65,6 +65,7 @@ function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCoun
                           }}
                           onChange={(e) => handleNameChange(colIndex - 1, e.target.value, playerNames, setPlayerNames)}
                           disabled={gameOver}
+                          style={{ backgroundColor: colors[colIndex - 1] }}
                           className='dtw-name-input'
                         />
                       </td>
