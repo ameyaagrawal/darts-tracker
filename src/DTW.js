@@ -54,6 +54,15 @@ function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCoun
                         <input
                           type="text"
                           value={playerNames[colIndex - 1]}
+                          onFocus={(e) => {
+                            e.target.dataset.previousValue = e.target.value; // Store the previous value
+                            e.target.value = ''; // Clear the input when clicked
+                          }}
+                          onBlur={(e) => {
+                            if (e.target.value.trim() === '') {
+                              e.target.value = e.target.dataset.previousValue; // Revert to the previous value if no changes were made
+                            }
+                          }}
                           onChange={(e) => handleNameChange(colIndex - 1, e.target.value, playerNames, setPlayerNames)}
                           disabled={gameOver}
                           className='dtw-name-input'
