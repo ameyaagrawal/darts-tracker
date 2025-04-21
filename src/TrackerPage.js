@@ -74,7 +74,15 @@ function TrackerPage({ selectedMode, numPlayers, handleBack }) {
           />
         </div>
       )}
-      <button onClick={handleBack}>Back</button>
+      <button
+        onClick={() => {
+          if (window.confirm('Are you sure you want to go back?')) {
+            handleBack();
+          }
+        }}
+      >
+        Back
+      </button>
     </div>
   );
 }
