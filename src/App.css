@@ -103,6 +103,13 @@ html, body {
   margin: 5px
 }
 
-.cricket-names, .cricket-scores, .dtw-names, .dtw-scores {
-  height: 0px;
+.cricket-scores, .dtw-scores {
+  font-size: 30px;
+  font-weight: bold;
+  color: red; /* A light gray */
+}
+
+.cricket-targets, .dtw-targets {
+  font-size: 30px;
+  font-weight: bold;
 }

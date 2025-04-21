@@ -60,16 +60,22 @@ function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCoun
                         />
                       </td>
                     );
-                  } else if (rowIndex > 0 && colIndex === 0) {
+                  } else if (rowIndex === 1 && colIndex === 0) {
+                    return (
+                      <td key={colIndex} className="dtw-scoress">
+                        Scores
+                      </td>
+                    );
+                  } else if (rowIndex === 1) {
+                    return (
+                      <td key={colIndex} className="dtw-scores">
+                        {scores[colIndex - 1]}
+                      </td>
+                    );
+                  } else if (rowIndex > 1 && colIndex === 0) {
                     return (
                       <td key={colIndex} className='dtw-targets'>
                         {targets[rowIndex - 1]}
-                      </td>
-                    );
-                  } else if (rowIndex === 1 && colIndex > 0) {
-                    return (
-                      <td key={colIndex} className='dtw-scores'>
-                        {scores[colIndex - 1]}
                       </td>
                     );
                   }

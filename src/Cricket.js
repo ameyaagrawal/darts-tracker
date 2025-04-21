@@ -31,13 +31,19 @@ function Cricket({ numPlayers, targets, playerNames, setPlayerNames, counts, set
                         />
                       </td>
                     );
-                  } else if (rowIndex === 1 && colIndex > 0) {
+                  } else if (rowIndex === 1 && colIndex === 0) {
+                    return (
+                      <td key={colIndex} className="cricket-scoress">
+                        Scores
+                      </td>
+                    );
+                  } else if (rowIndex === 1) {
                     return (
                       <td key={colIndex} className="cricket-scores">
                         {scores[colIndex - 1]}
                       </td>
                     );
-                  } else if (rowIndex > 0 && colIndex === 0) {
+                  } else if (rowIndex > 1 && colIndex === 0) {
                     return (
                       <td key={colIndex} className="cricket-targets">
                         {targets[rowIndex - 1]}
