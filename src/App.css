@@ -110,7 +110,6 @@ html, body {
 
 .cricket-scores, .dtw-scores {
   font-size: 30px;
-  font-weight: bold;
   color: red; /* A light gray */
 }
 

@@ -49,7 +49,14 @@ function Cricket({ numPlayers, targets, playerNames, setPlayerNames, counts, set
                     );
                   } else if (rowIndex === 1) {
                     return (
-                      <td key={colIndex} className="cricket-scores">
+                      <td
+                        key={colIndex}
+                        className="cricket-scores"
+                        style={{
+                          textDecoration: scores[colIndex - 1] === Math.min(...scores) ? 'underline' : 'none',
+                          fontWeight: scores[colIndex - 1] === Math.min(...scores) ? 'bold' : 'normal',
+                        }}
+                      >
                         {scores[colIndex - 1]}
                       </td>
                     );
