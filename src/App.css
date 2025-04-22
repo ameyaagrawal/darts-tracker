@@ -1,5 +1,5 @@
 h1 {
-  margin-top: 1px;
+  margin-top: 0px;
   margin-bottom: 10px;
 }
 
@@ -7,7 +7,6 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-
 }
 
 .App {
@@ -25,10 +24,11 @@ html, body {
 }
 
 .tracker-table {
-  height: 75vh;
-  max-height: 75vh;
+  height: 80vh;
+  max-height: 80vh;
   border-collapse: collapse;
   text-align: center;
+  border-color: lavender;
 }
 
 .tracker-button {
@@ -70,8 +70,8 @@ html, body {
 .undo-clear-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 11px;
-  margin-bottom: 11px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 .popup-window {
@@ -85,6 +85,11 @@ html, body {
   z-index: 1000;
 }
 
+.cricket-cell, .cricket-name-input, .dtw-cell, .dtw-name-input {
+  width: calc(85vh / var(--num-rows));
+  text-align: center;
+}
+
 .cricket-cell, .dtw-cell{
   position: relative;
   vertical-align: middle;
@@ -92,9 +97,12 @@ html, body {
   box-sizing: border-box;
 }
 
-.cricket-cell, .cricket-name-input, .dtw-cell, .dtw-name-input {
-  width: calc(85vh / var(--num-rows));
-  text-align: center;
+.cricket-name-input, .dtw-name-input {
+  height: 100%;
+  font-size: auto;
+  font-weight: bold;
+  border: 0px;
+  border-radius: 0px;
 }
 
 .dtw-score-input {
@@ -103,17 +111,19 @@ html, body {
   margin: 5px
 }
 
-.cricket-name-input, .dtw-name-input {
-  font-size: 14px;
-  font-weight: bold;
-}
-
 .cricket-scores, .dtw-scores {
-  font-size: 30px;
-  color: red; /* A light gray */
+  font-size: 25px;
+  font-family: sans-serif;
 }
 
 .cricket-targets, .dtw-targets {
-  font-size: 34px;
+  font-size: 25px;
+  font-family: sans-serif;
   font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.dead {
+  background-color: gray;
 }

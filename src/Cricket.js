@@ -18,10 +18,10 @@ function Cricket({ numPlayers, targets, playerNames, setPlayerNames, counts, set
               <tr key={rowIndex}>
                 {Array.from({ length: numPlayers + 1 }).map((_, colIndex) => {
                   if (rowIndex === 0 && colIndex === 0) {
-                    return <td key={colIndex}></td>;
+                    return <td key={colIndex} className='dead'></td>;
                   } else if (rowIndex === 0 && colIndex > 0) {
                     return (
-                      <td key={colIndex} className="cricket-names">
+                      <td key={colIndex} className="cricket-names" style={{ backgroundColor: colors[colIndex - 1] }}>
                         <input
                           type="text"
                           value={playerNames[colIndex - 1] || ''}
@@ -43,9 +43,7 @@ function Cricket({ numPlayers, targets, playerNames, setPlayerNames, counts, set
                     );
                   } else if (rowIndex === 1 && colIndex === 0) {
                     return (
-                      <td key={colIndex} className="cricket-scoress">
-                        Scores
-                      </td>
+                      <td key={colIndex} className="dead"></td>
                     );
                   } else if (rowIndex === 1) {
                     return (
@@ -53,8 +51,7 @@ function Cricket({ numPlayers, targets, playerNames, setPlayerNames, counts, set
                         key={colIndex}
                         className="cricket-scores"
                         style={{
-                          textDecoration: scores[colIndex - 1] === Math.min(...scores) ? 'underline' : 'none',
-                          fontWeight: scores[colIndex - 1] === Math.min(...scores) ? 'bold' : 'normal',
+                          color: scores[colIndex - 1] === Math.min(...scores) ? 'red' : 'black',
                         }}
                       >
                         {scores[colIndex - 1]}

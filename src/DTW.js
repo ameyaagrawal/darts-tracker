@@ -46,11 +46,10 @@ function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCoun
               <tr key={rowIndex}>
                 {Array.from({ length: numPlayers + 1 }).map((_, colIndex) => {
                   if (rowIndex === 0 && colIndex === 0) {
-                    return <td key={colIndex}></td>;
+                    return <td key={colIndex} className='dead'></td>;
                   } else if (rowIndex === 0 && colIndex >= 1) {
-                    // Editable text fields for the first row's last numPlayers columns
                     return (
-                      <td key={colIndex} className='dtw-names'>
+                      <td key={colIndex} className='dtw-names' style={{ backgroundColor: colors[colIndex - 1] }}>
                         <input
                           type="text"
                           value={playerNames[colIndex - 1]}
@@ -72,9 +71,7 @@ function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCoun
                     );
                   } else if (rowIndex === 1 && colIndex === 0) {
                     return (
-                      <td key={colIndex} className="dtw-scoress">
-                        Scores
-                      </td>
+                      <td key={colIndex} className="dead"></td>
                     );
                   } else if (rowIndex === 1) {
                     return (
@@ -82,8 +79,7 @@ function DTW({ numPlayers, targets, playerNames, setPlayerNames, counts, setCoun
                         key={colIndex}
                         className="cricket-scores"
                         style={{
-                          textDecoration: scores[colIndex - 1] === Math.min(...scores) ? 'underline' : 'none',
-                          fontWeight: scores[colIndex - 1] === Math.min(...scores) ? 'bold' : 'normal',
+                          color: scores[colIndex - 1] === Math.min(...scores) ? 'red' : 'black',
                         }}
                       >
                         {scores[colIndex - 1]}
